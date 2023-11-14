@@ -6,7 +6,7 @@ const app = Vue.createApp({
             description: 'A warm fuzzy pair of socks.',
             image: './assets/images/socks_green.jpg',
             details: ['50% cotton', '30% wool', '20% polyester'],
-            inventory: 100,
+            inStock: true,
             onSale: true,
             variants: [
                 { id: 2234, color: 'green', image: './assets/images/socks_green.jpg'},
