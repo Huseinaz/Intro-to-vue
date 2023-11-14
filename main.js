@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data: function () {
         return {
+            cart: 0,
             product: 'Socks',
             description: 'A warm fuzzy pair of socks.',
             image: './assets/images/socks_green.jpg',
@@ -8,11 +9,24 @@ const app = Vue.createApp({
             inventory: 100,
             onSale: true,
             variants: [
-                { id: 2234, color: 'green'},
-                { id: 2233, color: 'blue'},
+                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg'},
+                { id: 2233, color: 'blue', image: './assets/images/socks_blue.jpg'},
             ],
             sizes: ['S', 'M', 'L', 'XL'],
             url: 'https://www.vuemastery.com/'
         }
-    }
+    },
+    methods: {
+        addToCart() {
+            this.cart +=1
+        },
+        removeItem() {
+            if(this.cart > 0) {
+                this.cart -=1
+            }
+        },
+        updateImage(variantImage) {
+            this.image = variantImage
+        }
+    },
 })
