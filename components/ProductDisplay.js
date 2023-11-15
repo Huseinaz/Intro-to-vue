@@ -35,6 +35,13 @@ app.component('product-display', {
             :disabled="!inStock">
             Add to Cart
           </button>
+          <button
+            class="button"
+            :class="{ 'disabledButton': !inStock }"
+            @click="removeFromCart"
+            :disabled="!inStock">
+            Remove Item
+          </button>
         </div>
     </div>`,
     data() {
@@ -52,12 +59,10 @@ app.component('product-display', {
     },
     methods: {
         addToCart() {
-            this.cart +=1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
         },
-        removeItem() {
-            if(this.cart > 0) {
-                this.cart -=1
-            }
+        removeFromCart() {
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
         },
         updateVariant(index) {
             this.selectedVariant = index
