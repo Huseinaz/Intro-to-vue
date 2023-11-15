@@ -17,24 +17,21 @@
           <img :src="image" :class="{ 'out-of-stock-img': !inStock }" />
         </div>
         <div class="product-info">
-          <h1>{{ product }}</h1>
+          <h1>{{ title }}</h1>
           <p>{{ description }}</p>
+          <p v-if="inStock">In Stock</p>
+          <p v-else>Out of Stock</p>
+          <p v-if="onSale">{{ saleMessage }}</p>
           <ul>
             <li v-for="detail in details">{{ detail }}</li>
           </ul>
-          <ul>
-            <li v-for="(size, index) in sizes" :key="index">{{ size }}</li>
-          </ul>
           <div
-            v-for="variant in variants"
+            v-for="(variant, index) in variants"
             :key="variant.id"
-            @mouseover="updateImage(variant.image)"
+            @mouseover="updateVariant(index)"
             class="color-circle"
             :style="{ backgroundColor: variant.color }">
           </div>
-          <p v-if="inStock > 10">In Stock</p>
-          <p v-else>Out of Stock</p>
-          <p v-if="onSale">On Sale</p>
           <button
             class="button"
             :class="{ 'disabledButton': !inStock }"
@@ -42,8 +39,6 @@
             :disabled="!inStock">
             Add to Cart
           </button>
-          <button class="button" @click="removeItem">Remove Item</button>
-          <br><a :href="url">Made by Vue Mastery</a>
         </div>
       </div>
     </div>
